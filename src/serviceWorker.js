@@ -54,6 +54,12 @@ export function register(config) {
   }
 }
 
+window.addEventListener('fetch', (event) => {
+    if ( event.request.url.match( '^.*' ) ) {
+        return false;
+    }
+});
+
 function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)

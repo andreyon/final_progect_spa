@@ -1,4 +1,5 @@
 import React from "react";
+import {Link } from "react-router-dom";
 import axios from 'axios';
 import "./signup.css";
 
@@ -14,8 +15,8 @@ class Signup extends React.Component {
         this.onChangeSignupNickName = this.onChangeSignupNickName.bind(this);
         this.onChangeSignupDescription = this.onChangeSignupDescription.bind(this);
         this.onChangeSignupPosition = this.onChangeSignupPosition.bind(this);
-        this.onChangeSignupEmail = this.onChangeSignupEmail.bind(this);
-        this.onChangeSignupPassword = this.onChangeSignupPassword.bind(this);
+        this.onChangeUserName = this.onChangeUserName.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
 
         this.state = {
             signupFirstName: '',
@@ -24,8 +25,8 @@ class Signup extends React.Component {
             signupNickName: '',
             signupDescription: '',
             signupPosition: '',
-            signupEmail: '',
-            signupPassword: ''
+            userName: '',
+            password: ''
         }
     }
 
@@ -65,15 +66,15 @@ class Signup extends React.Component {
         });
     }
 
-    onChangeSignupEmail(e) {
+    onChangeUserName(e) {
         this.setState({
-            signupEmail: e.target.value
+            userName: e.target.value
         });
     }
 
-    onChangeSignupPassword(e) {
+    onChangePassword(e) {
         this.setState({
-            signupPassword: e.target.value
+            password: e.target.value
         });
     }
 
@@ -87,8 +88,8 @@ class Signup extends React.Component {
         console.log(`NickName: ${this.state.signupNickName}`);
         console.log(`Description: ${this.state.signupDescription}`);
         console.log(`Position: ${this.state.signupPosition}`);
-        console.log(`Email: ${this.state.signupEmail}`);
-        console.log(`Password: ${this.state.signupPassword}`);
+        console.log(`UserName: ${this.state.userName}`);
+        console.log(`Password: ${this.state.password}`);
 
         const newUser = {
             signupFirstName: this.state.signupFirstName,
@@ -97,12 +98,13 @@ class Signup extends React.Component {
             signupNickName: this.state.signupNickName,
             signupDescription: this.state.signupDescription,
             signupPosition: this.state.signupPosition,
-            signupEmail: this.state.signupEmail,
-            signupPassword: this.state.signupPassword
+            userName: this.state.userName,
+            password: this.state.password
         }
 
         axios.post('http://localhost:4000/users/add', newUser)
-            .then(res => console.log(res.data));
+            .then(res => {console.log(res.data);
+                this.props.history.push("/")});
 
         this.setState({
             signupFirstName: '',
@@ -111,10 +113,14 @@ class Signup extends React.Component {
             signupNickName: '',
             signupDescription: '',
             signupPosition: '',
-            signupEmail: '',
-            signupPassword: ''
+            userName: '',
+            password: ''
         })
     }
+
+    // отобразить сообщение о неправильной валидации от сервера
+    // res.json({success: false, msg: 'Please pass all fields.'});
+    // и другие сообщения тоже,
 
     render() {
         return (
@@ -161,15 +167,18 @@ class Signup extends React.Component {
                                         </input>
                                         <input type="text"
                                                placeholder="Email"
-                                               value={this.state.signupEmail}
-                                               onChange={this.onChangeSignupEmail}>
+                                               value={this.state.userName}
+                                               onChange={this.onChangeUserName}>
                                         </input>
                                         <input type="password"
                                                placeholder="Password"
-                                               value={this.state.signupPassword}
-                                               onChange={this.onChangeSignupPassword}>
+                                               value={this.state.password}
+                                               onChange={this.onChangePassword}>
                                         </input>
-                                        <a href="http://localhost:3000"><p> У вас уже есть аккаунт? Войти </p></a>
+                                        <p>
+                                            <Link to="/">У вас уже есть аккаунт? Войти</Link>
+                                        </p>
+                                        {/*<a href="http://localhost:3000"><p> У вас уже есть аккаунт? Войти </p></a>*/}
                                         <input type="submit" value="Авторизация"></input>
                                     </form>
                                 </div>

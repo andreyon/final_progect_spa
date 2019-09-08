@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
             user.comparePassword(req.body.password, function (err, isMatch) {
                 if (isMatch && !err) {
                     // if user is found and password is right create a token
-                    var token = jwt.sign(user.toJSON(), settings.secret, {expiresIn: '1m'});
+                    var token = jwt.sign(user.toJSON(), settings.secret, {expiresIn: '2h'});
                     // return the information including token as JSON
                     res.json({success: true, token: 'JWT ' + token});
                 } else {

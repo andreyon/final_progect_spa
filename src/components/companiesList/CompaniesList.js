@@ -1,12 +1,12 @@
 import React from "react";
-import "./userlist.css";
+import "./companiesList.css";
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux'
 import store from '../../index';
 
-class Userlist extends React.Component {
+class CompaniesList extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -14,18 +14,17 @@ class Userlist extends React.Component {
 
     render() {
         return (
-            <div className="user-list">
-                <h2>User list:</h2>
-                {(this.props.users) ? this.props.users.map(home => <div key = {home._id}>{home.signupFirstName}</div>) : false}
+            <div className="companies-List">
+                <h2>Companies list:</h2>
+                {(this.props.companies) ? this.props.companies.map(home => <div key = {home._id}>{home.signupLastName}</div>) : false}
             </div>
         );
     }
 }
 
-
 const mapStateToProps = (store) => {
     return {
-        users: store.userState.users
+        companies: store.userState.users
     };
 }
 
@@ -38,7 +37,7 @@ export default connect(
     dispatch => ({
         // addToStore: ()
     })
-)(Userlist)
+)(CompaniesList)
 
 
-// export default Userlist;
+// export default CompaniesList;

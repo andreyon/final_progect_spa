@@ -6,6 +6,9 @@ import axios from 'axios';
 import {connect} from 'react-redux'
 import store from '../../index';
 import Userlist from "../userList/Userlist";
+import Sidebar from '../sidebar/Sidebar'
+import CompaniesList from '../companiesList/CompaniesList'
+import Header from "../header/Header";
 
 // import Button from "./button";
 
@@ -74,22 +77,28 @@ class Home extends React.Component {
 
 
         return (
-            <div id="home">
-                <h1>Начало работы</h1>
-                <button>Список пользователей</button>
-                {this.state.users.map(home => <div>{home.signupFirstName}</div>)}
+            <div className="home">
+                <Header/>
+                <div className="home-flex-wrapper">
 
-                <h2>Store:</h2>
-                {(this.props.users) ? this.props.users.map(home => <div key = {home._id}>{home.signupFirstName}</div>):false}
+                {/*<div className="sidebar-container">
+                    <Sidebar/>
+                </div>*/}
 
-                {/*{this.props.users.map(home => <div>{home.signupFirstName}</div>)}*/}
+                {/*<div className="lists-container">*/}
 
-                <ul>
+                    {/*<h2>State:</h2>*/}
+                    {/*{this.state.users.map(home => <div>{home.signupFirstName}</div>)}*/}
 
-                    {/*{ this.props.users.map((name, index) =><li key = {index}>{name}</li>)}*/}
-                </ul>
-                {/*<p>{this.props.testStore}</p>*/}
-                <Userlist/>
+                    {/*<h2>Store:</h2>*/}
+                    {/*{(this.props.users) ? this.props.users.map(home => <div*/}
+                        {/*key={home._id}>{home.signupFirstName}</div>) : false}*/}
+
+                    {/*/!*<ul>*/}
+                        {/*{ this.props.users.map((name, index) =><li key = {index}>{name}</li>)}*/}
+                    {/*</ul>*!/*/}
+                {/*</div>*/}
+                </div>
             </div>
         );
     }

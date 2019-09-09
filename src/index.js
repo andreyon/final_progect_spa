@@ -11,6 +11,29 @@ import * as serviceWorker from './serviceWorker';
 // import * as reducers from './store/reducers';
 // const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
 
+
+// Функция-редьюсер для current user
+const currentUserReducer = function(state = [], action) {
+    switch(action.type) {
+        case 'CURRENT_USER_SUCCESS':
+            return Object.assign([], state, { currentUser: action.currentUser });
+    }
+    return state;
+}
+
+/*const currentUserIdReducer = function(state = {currentUserId: "no exit"}, action) {
+    switch(action.type) {
+        case 'CURRENT_USER_SUCCESS':
+            return Object.assign([], state, { currentUserId: action.currentUserId });
+        // return [
+        // ...state, action.users
+        // ]
+    }
+    return state;
+}*/
+
+
+
 // Функция-редьюсер для списка пользователей
 
 const userReducer = function(state = [], action) {
@@ -46,7 +69,8 @@ function companyReducer(state = [], action) {
 // Combine Reducers
 const reducers = combineReducers({
     userState: userReducer,
-    companyState: companyReducer
+    companyState: companyReducer,
+    currentUserState: currentUserReducer
 });
 
 // Создание хранилища с передачей редьюсера
@@ -57,6 +81,8 @@ store.dispatch({type: 'ADD_USERS', user: {name: 'wow'}});
 store.dispatch({type: 'ADD_USERS', user: {name: 'lol'}});
 // store.dispatch({type: 'ADD_COMPANIES', company: {name: 'Kharkivgaz'}});
 store.dispatch({type: 'USER_LIST_SUCCESS', user: {name: 'Kharkivgaz'}});
+
+store.dispatch({type: 'CURRENT_USER_SUCCESS'});
 
 
 

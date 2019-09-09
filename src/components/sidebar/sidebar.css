@@ -2,4 +2,19 @@
   background-color: #E8EAED;
   width: 30%;
   padding: 30px 10px 10px 10px;
+  height: 100vh;
+}
+
+.sidebar-link {
+  font-size: 22px;
+  padding: 10px 0;
+}
+
+.sidebar-link a {
+  text-decoration: none;
+  color: #2196f3;
+}
+
+.sidebar-link:hover {
+  background-color: #fff;
 }

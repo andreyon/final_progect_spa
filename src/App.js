@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    BrowserRouter as Router, Route,
+    BrowserRouter as Router, Route, withRouter,
     Link
 } from "react-router-dom";
 import './App.css';
@@ -11,6 +11,10 @@ import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
 import Userlist from "./components/userList/Userlist";
 import CompaniesList from "./components/companiesList/CompaniesList";
+import CompanyUpdateForm from "./components/companyUpdeteForm/CompanyUpdeteForm";
+import Profile from "./components/profile/Profile";
+import ProfileUpdateForm from "./components/profileUpdateForm/ProfileUpdateForm";
+import StartPage from "./components/startPage/StartPage";
 
 
 function App() {
@@ -23,28 +27,16 @@ function App() {
                 <Route component={Home}/>
                 <div className="home-flex-wrapper">
                     <Route component={Sidebar}/>
-                    <Route path="/home/userlist" component={Userlist}></Route>
-                    <Route path="/home/companies" component={CompaniesList}></Route>
+
+                    <Route path="/home" exact component={StartPage}/>
+                    <Route path="/home/userlist" exact component={Userlist}/>
+                    <Route path="/home/companies" exact component={CompaniesList}/>
+                    <Route path="/home/companies/add" component={CompanyUpdateForm}/>
+                    <Route path="/home/profile" exact component={Profile}/>
+                    <Route path="/home/profile/update" component={ProfileUpdateForm}/>
+
                 </div>
             </Route>
-
-
-            {/*<Route path="/home" exact component={Home}>
-                // <Route path="/home/userlist" component={Userlist}></Route>
-                // <Route path="/home/companies" component={Home}></Route>
-            </Route>
-
-            <Route path="/home/userlist">
-                <Route exact component={Home}/>
-                <Route component={Userlist}/>
-            </Route>
-
-            <Route path="/home/companies">
-                <Route exact component={Home}/>
-                <Route component={CompaniesList}/>
-            </Route>*/}
-
-
         </Router>
     );
 }

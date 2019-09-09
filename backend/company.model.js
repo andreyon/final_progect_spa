@@ -26,7 +26,16 @@ let UserSchema = new Schema({
     },
     password: {
         type: String
-    }
+    },
+    company: [
+        {
+            name: String,
+            adress: String,
+            service: String,
+            employers: String,
+            description: String,
+        }
+]
 });
 
 UserSchema.pre('save', function (next) {

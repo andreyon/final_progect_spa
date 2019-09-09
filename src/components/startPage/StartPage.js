@@ -1,12 +1,12 @@
 import React from "react";
-import "./userlist.css";
+import "./startPage.css";
 import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux'
 import store from '../../index';
 
-class Userlist extends React.Component {
+class StartPage extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -14,10 +14,9 @@ class Userlist extends React.Component {
 
     render() {
         return (
-            <div className="user-list">
-                <h2>User list:</h2>
-                {(this.props.users) ? this.props.users.map(home => <div key = {home._id}>{home.signupFirstName}</div>) : false}
-                {/*{(this.props.users) ? this.props.users[1].signupFirstName : false}*/}
+            <div className="start-page">
+                Welcome,{" "}
+                {(this.props.currentUser) ? this.props.currentUser.signupFirstName + " make your choice in the menu" : "stranger, you must register or login"}
             </div>
         );
     }
@@ -26,7 +25,7 @@ class Userlist extends React.Component {
 
 const mapStateToProps = (store) => {
     return {
-        users: store.userState.users
+        currentUser: store.currentUserState.currentUser
     };
 }
 
@@ -39,7 +38,4 @@ export default connect(
     dispatch => ({
         // addToStore: ()
     })
-)(Userlist)
-
-
-// export default Userlist;
+)(StartPage)

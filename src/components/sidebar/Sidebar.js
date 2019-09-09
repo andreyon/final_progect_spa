@@ -15,11 +15,20 @@ class Sidebar extends React.Component {
     render() {
         return (
             <div className="sidebar">
-                <div>
-                    <Link to ="/home/userlist">Список пользователей</Link>
+                <div className="sidebar-link">
+                    <Link to ="/home/userlist">Users list</Link>
                 </div>
-                <div>
-                    <Link to="/home/companies">Список компаний</Link>
+                <div className="sidebar-link">
+                    <Link to="/home/companies">Your companies list</Link>
+                </div>
+                <div className="sidebar-link">
+                    <Link to="/home/companies/update">Add your company</Link>
+                </div>
+                <div className="sidebar-link">
+                    <Link to="/home/companies/add">Update your company</Link>
+                </div>
+                <div className="sidebar-link">
+                    <Link to="/home/profile">Your profile</Link>
                 </div>
             </div>
         );

@@ -1,0 +1,31 @@
+.profile {
+  padding: 15px 15px 15px 40px;
+  width: 70%;
+  font-size: 18px;
+}
+
+.profile-item{
+  display: flex;
+  padding: 10px 0;
+}
+
+.profile span {
+  min-width: 30%;
+}
+
+.profile a {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  width: 80%;
+  line-height: 30px;
+  border: none;
+  border-bottom: 5px solid #2184d7;
+  color: white;
+  background: #2196f3;
+  font-size: 18px;
+  font-weight: 200;
+  cursor: pointer;
+  transition: box-shadow .4s ease;
+  margin-bottom: 12px;
+}

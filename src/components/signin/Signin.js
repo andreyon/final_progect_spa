@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import "./signin.css";
 import axios from "axios";
+import store from "../../index";
 
 // import Button from "./button";
 
@@ -46,8 +47,12 @@ class Signin extends React.Component {
             .then((result) => {
                 localStorage.setItem('jwtToken', result.data.token);
                 this.setState({message: ''});
-                this.props.history.push('/home')
-                console.log('result.data.token');
+                store.dispatch({
+                    type: 'CURRENT_USER_SUCCESS',
+                    currentUser: result.data.user
+                });
+                this.props.history.push('/home');
+                console.log(result.data.currentUserId);// текущий пользователь
             })
             .catch((error) => {
                 if (error.response.status === 401) {
@@ -83,7 +88,7 @@ class Signin extends React.Component {
                                         </div>
                                         }
 
-                                        <input type="text"
+                                        <input type="email"
                                                placeholder="Email"
                                                value={this.state.userName}
                                                onChange={this.onChangeUserName}>
@@ -94,9 +99,9 @@ class Signin extends React.Component {
                                                onChange={this.onChangePassword}>
                                         </input>
                                         <p>
-                                            <Link to="/signup">У вас нет аккаунта? Регистрация</Link>
+                                            <Link to="/signup">No account? Sign up</Link>
                                         </p>
-                                        <input type="submit" value="Авторизация"></input>
+                                        <input type="submit" value="Sign in"></input>
                                     </form>
                                 </div>
                             </div>

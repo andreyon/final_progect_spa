@@ -13,6 +13,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 
 var users = require('./routes/users'); //routs
+var companies = require('./routes/companies'); //routs
 
 mongoose.connect('mongodb://127.0.0.1:27017/company', {useNewUrlParser: true});
 const connection = mongoose.connection;
@@ -30,9 +31,13 @@ var auth = require('./routes/auth');
 var logout = require('./routes/logout');
 
 app.use('/login', auth); // роутер идентификации
+app.use('/current', auth); // роутер текущего пользователя
 app.use('/logout', logout); // роутер выхода
 app.use('/users', users); // end point get all users from DB
 app.use('/users/add', users); // end point add user
+app.use('/users/update', users); // point patch user
+app.use('/companies/update', companies); // end point update company
+app.use('/companies/add', companies); // end point add company
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);

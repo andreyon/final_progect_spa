@@ -1,14 +1,14 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from 'axios';
-import "./signup.css";
+import connect from "react-redux/es/connect/connect";
+import store from "../../index";
 
-// import Button from "./button";
+// import "./profileUpdateForm.css;
 
-class Signup extends React.Component {
+class ProfileUpdateForm extends React.Component {
     constructor(props) {
         super(props);
-
         this.onChangeSignupFirstName = this.onChangeSignupFirstName.bind(this);
         this.onChangeSignupLastName = this.onChangeSignupLastName.bind(this);
         this.onChangeSignupPhoneNumber = this.onChangeSignupPhoneNumber.bind(this);
@@ -16,17 +16,15 @@ class Signup extends React.Component {
         this.onChangeSignupDescription = this.onChangeSignupDescription.bind(this);
         this.onChangeSignupPosition = this.onChangeSignupPosition.bind(this);
         this.onChangeUserName = this.onChangeUserName.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
 
         this.state = {
-            signupFirstName: '',
-            signupLastName: '',
-            signupPhoneNumber: '',
-            signupNickName: '',
-            signupDescription: '',
-            signupPosition: '',
-            userName: '',
-            password: ''
+            signupFirstName: this.props.currentUser ? this.props.currentUser.signupFirstName : "",
+            signupLastName: this.props.currentUser ? this.props.currentUser.signupLastName : '',
+            signupPhoneNumber: this.props.currentUser ? this.props.currentUser.signupPhoneNumber : '',
+            signupNickName: this.props.currentUser ? this.props.currentUser.signupNickName : '',
+            signupDescription: this.props.currentUser ? this.props.currentUser.signupDescription : '',
+            signupPosition: this.props.currentUser ? this.props.currentUser.signupPosition : '',
+            userName: this.props.currentUser ? this.props.currentUser.userName : ''
         }
     }
 
@@ -72,26 +70,11 @@ class Signup extends React.Component {
         });
     }
 
-    onChangePassword(e) {
-        this.setState({
-            password: e.target.value
-        });
-    }
-
     onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`Form submitted:`);
-        console.log("FirstName:" + this.state.signupFirstName);
-        console.log(`LastName: ${this.state.signupLastName}`);
-        console.log(`PhoneNumber: ${this.state.signupPhoneNumber}`);
-        console.log(`NickName: ${this.state.signupNickName}`);
-        console.log(`Description: ${this.state.signupDescription}`);
-        console.log(`Position: ${this.state.signupPosition}`);
-        console.log(`UserName: ${this.state.userName}`);
-        console.log(`Password: ${this.state.password}`);
-
-        const newUser = {
+        const updateUser = {
+            id: this.props.currentUser ? this.props.currentUser._id : false,
             signupFirstName: this.state.signupFirstName,
             signupLastName: this.state.signupLastName,
             signupPhoneNumber: this.state.signupPhoneNumber,
@@ -99,23 +82,29 @@ class Signup extends React.Component {
             signupDescription: this.state.signupDescription,
             signupPosition: this.state.signupPosition,
             userName: this.state.userName,
-            password: this.state.password
-        }
+        };
 
-        axios.post('http://localhost:4000/users/add', newUser)
-            .then(res => {console.log(res.data);
-                this.props.history.push("/")});
+        axios.patch('http://localhost:4000/users/update', updateUser)
+            .then(res => {
+                store.dispatch({
+                    type: 'CURRENT_USER_SUCCESS',
+                    currentUser: res.data.user
+                })
+                    setTimeout(()=>{
+                this.props.history.push('/home/profile')}, 1000);
+                console.log(res.data)
+            });
 
-        this.setState({
+
+        /*this.setState({
             signupFirstName: '',
             signupLastName: '',
             signupPhoneNumber: '',
             signupNickName: '',
             signupDescription: '',
             signupPosition: '',
-            userName: '',
-            password: ''
-        })
+            userName: ''
+        })*/
     }
 
     // отобразить сообщение о неправильной валидации от сервера
@@ -124,62 +113,65 @@ class Signup extends React.Component {
 
     render() {
         return (
-            <div id="range2">
+            <div className="profile-update-form range2">
 
                 <div className="outer">
                     <div className="middle">
                         <div className="inner">
 
                             <div className="login-wr">
-                                <h2>Sign up</h2>
+                                <h2>Update profile</h2>
 
                                 <div className="form">
                                     <form onSubmit={this.onSubmit}>
+                                        <span>First name:</span>
                                         <input type="text"
-                                               placeholder="First name"
+                                               // placeholder={this.state.signupFirstName}
                                                value={this.state.signupFirstName}
                                                onChange={this.onChangeSignupFirstName}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Last name:</span>
                                         <input type="text"
-                                               placeholder="Last name"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupLastName : false}
                                                value={this.state.signupLastName}
                                                onChange={this.onChangeSignupLastName}>
-                                        </input>
+                                        </input><br/>
+                                        <span>PhoneNumber:</span>
                                         <input type="text"
-                                               placeholder="Phone number"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupPhoneNumber : false}
                                                value={this.state.signupPhoneNumber}
                                                onChange={this.onChangeSignupPhoneNumber}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Nick name:</span>
                                         <input type="text"
-                                               placeholder="Nick Name"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupNickName : false}
                                                value={this.state.signupNickName}
                                                onChange={this.onChangeSignupNickName}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Description:</span>
                                         <input type="text"
-                                               placeholder="Description"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupDescription : false}
                                                value={this.state.signupDescription}
                                                onChange={this.onChangeSignupDescription}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Position:</span>
                                         <input type="text"
-                                               placeholder="Position"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupPosition : false}
                                                value={this.state.signupPosition}
                                                onChange={this.onChangeSignupPosition}>
                                         </input>
-                                        <input type="email"
-                                               placeholder="Email"
+                                        <br/>
+                                        <span>Email:</span><br/>
+                                        <input type="text"
+                                               // placeholder={this.props.currentUser ? this.props.currentUser.userName : false}
                                                value={this.state.userName}
                                                onChange={this.onChangeUserName}>
                                         </input>
-                                        <input type="password"
-                                               placeholder="Password"
-                                               value={this.state.password}
-                                               onChange={this.onChangePassword}>
-                                        </input>
-                                        <p>
-                                            <Link to="/">Have an account? Log in</Link>
-                                        </p>
+                                        {/*<p>*/}
+                                        {/*<Link to="/">У вас уже есть аккаунт? Войти</Link>*/}
+                                        {/*</p>*/}
                                         {/*<a href="http://localhost:3000"><p> У вас уже есть аккаунт? Войти </p></a>*/}
-                                        <input type="submit" value="Create account"></input>
+                                        <input type="submit" value="Update"></input>
                                     </form>
                                 </div>
                             </div>
@@ -193,4 +185,19 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+
+const mapStateToProps = (store) => {
+    return {
+        currentUser: store.currentUserState.currentUser
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    dispatch => ({
+        // addToStore: ()
+    })
+)(ProfileUpdateForm)
+
+
+// export default ProfileUpdateForm;

@@ -1,0 +1,28 @@
+.company-list {
+  padding: 15px 15px 15px 40px;
+  width: 70%;
+  font-size: 18px;
+}
+
+.company-list  ul {
+  padding: 0;
+}
+
+.company-list  li {
+  display: flex;
+  padding: 10px 0;
+  cursor: pointer;
+}
+
+.company-list .header-company-list {
+  font-weight: 900;
+}
+
+
+.company-list .list-wrapper li:hover {
+  background-color: #E8EAED;
+}
+
+.company-list span {
+  min-width: 33%;
+}

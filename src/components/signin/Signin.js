@@ -83,7 +83,7 @@ class Signin extends React.Component {
                                     <form onSubmit={this.onSubmit}>
 
                                         {this.state.message !== '' &&
-                                        <div>
+                                        <div className="login-massage">
                                             {this.state.message}
                                         </div>
                                         }

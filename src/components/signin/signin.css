@@ -112,3 +112,8 @@ body{
 #range2 p {
   padding-bottom: 10px;
 }
+
+.login-massage {
+  color: #ff0000;
+  padding-bottom: 5px;
+}

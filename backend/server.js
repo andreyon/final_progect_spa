@@ -36,8 +36,8 @@ app.use('/logout', logout); // роутер выхода
 app.use('/users', users); // end point get all users from DB
 app.use('/users/add', users); // end point add user
 app.use('/users/update', users); // point patch user
-app.use('/companies/update', companies); // end point update company
-app.use('/companies/add', companies); // end point add company
+app.use('/companies/update', companies); // update company
+app.use('/companies/add', companies); // add company
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);

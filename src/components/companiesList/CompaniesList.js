@@ -1,16 +1,23 @@
 import React from "react";
 import "./companiesList.css";
-import ReactDOM from 'react-dom';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
 import {connect} from 'react-redux'
 import store from '../../index';
 
 class CompaniesList extends React.Component {
     constructor(props) {
         super(props);
+        this.heandlerClickCompanyItem = this.heandlerClickCompanyItem.bind(this)
     }
 
+    heandlerClickCompanyItem(e) {
+        store.dispatch({
+            type: 'CURRENT_COMPANY_VIEW',
+            currentViewCompanyId: this.props.currentUser ? this.props.currentUser.company.find(x=>x._id === e.currentTarget.className): false
+        });
+        setTimeout(() => {
+            this.props.history.push('/home/companies/profile')
+        }, 500);
+    }
 
     render() {
         return (
@@ -24,7 +31,11 @@ class CompaniesList extends React.Component {
                         <span>Number of employers</span>
                     </li>
                     <div className="list-wrapper">
-                    {(this.props.currentUser) ? this.props.currentUser.company.map(item => <li key = {item._id}><span>{item.name}</span><span>{item.service}</span><span>{item.employers}</span></li>) : false}
+                        {(this.props.currentUser) ? this.props.currentUser.company.map(item => <li key={item._id}
+                                                                                                   className={item._id}
+                                                                                                   onClick={this.heandlerClickCompanyItem}>
+                            <span>{item.name}</span><span>{item.service}</span><span>{item.employers}</span>
+                        </li>) : false}
                     </div>
                 </ul>
             </div>
@@ -32,21 +43,11 @@ class CompaniesList extends React.Component {
     }
 }
 
-
 const mapStateToProps = (store) => {
     return {
-        // users: store.userState.users
-        currentUser: store.currentUserState.currentUser
+        currentUser: store.currentUserState.currentUser,
+        currentViewCompanyId: store.currentViewCompanyIdState.currentViewCompanyId
     };
-}
+};
 
-export default connect(
-    mapStateToProps,
-    // state => ({
-    //     testStore: state
-    // })
-
-    dispatch => ({
-        // addToStore: ()
-    })
-)(CompaniesList)
+export default connect(mapStateToProps)(CompaniesList)

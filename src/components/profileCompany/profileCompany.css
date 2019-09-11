@@ -1,27 +1,36 @@
-.profile {
+.profile-company {
   padding: 15px 15px 15px 40px;
   width: 70%;
   font-size: 18px;
 }
 
-.profile-item{
+.profile-company p {
+  font-size: 14px;
+}
+
+.profile-company div {
   display: flex;
-  padding: 10px 0;
+  padding: 15px 0;
 }
 
-.profile span {
-  min-width: 30%;
+.profile-company-btn {
+  justify-content: space-around;
+  padding-top: 30px;
 }
 
-.profile span:first-child {
+.profile-company span:first-child {
   font-weight: 600;
 }
 
-.profile a {
+.profile-company span {
+  min-width: 40%;
+}
+
+.profile-company a {
   display: block;
   text-align: center;
   text-decoration: none;
-  width: 80%;
+  width: 40%;
   line-height: 30px;
   border: none;
   border-bottom: 5px solid #2184d7;
@@ -32,4 +41,9 @@
   cursor: pointer;
   transition: box-shadow .4s ease;
   margin-bottom: 12px;
+}
+
+.profile-company a:last-child{
+  background: #33708c;
+  border-bottom: 5px solid #195891;
 }

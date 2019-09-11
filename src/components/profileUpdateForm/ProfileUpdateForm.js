@@ -92,7 +92,6 @@ class ProfileUpdateForm extends React.Component {
                 })
                     setTimeout(()=>{
                 this.props.history.push('/home/profile')}, 1000);
-                console.log(res.data)
             });
 
 
@@ -124,37 +123,37 @@ class ProfileUpdateForm extends React.Component {
 
                                 <div className="form">
                                     <form onSubmit={this.onSubmit}>
-                                        <span>First name:</span>
+                                        <span>First name:</span><br/>
                                         <input type="text"
                                                // placeholder={this.state.signupFirstName}
                                                value={this.state.signupFirstName}
                                                onChange={this.onChangeSignupFirstName}>
                                         </input><br/>
-                                        <span>Last name:</span>
+                                        <span>Last name:</span><br/>
                                         <input type="text"
                                                // placeholder={this.props.currentUser ? this.props.currentUser.signupLastName : false}
                                                value={this.state.signupLastName}
                                                onChange={this.onChangeSignupLastName}>
                                         </input><br/>
-                                        <span>PhoneNumber:</span>
+                                        <span>PhoneNumber:</span><br/>
                                         <input type="text"
                                                // placeholder={this.props.currentUser ? this.props.currentUser.signupPhoneNumber : false}
                                                value={this.state.signupPhoneNumber}
                                                onChange={this.onChangeSignupPhoneNumber}>
                                         </input><br/>
-                                        <span>Nick name:</span>
+                                        <span>Nick name:</span><br/>
                                         <input type="text"
                                                // placeholder={this.props.currentUser ? this.props.currentUser.signupNickName : false}
                                                value={this.state.signupNickName}
                                                onChange={this.onChangeSignupNickName}>
                                         </input><br/>
-                                        <span>Description:</span>
+                                        <span>Description:</span><br/>
                                         <input type="text"
                                                // placeholder={this.props.currentUser ? this.props.currentUser.signupDescription : false}
                                                value={this.state.signupDescription}
                                                onChange={this.onChangeSignupDescription}>
                                         </input><br/>
-                                        <span>Position:</span>
+                                        <span>Position:</span><br/>
                                         <input type="text"
                                                // placeholder={this.props.currentUser ? this.props.currentUser.signupPosition : false}
                                                value={this.state.signupPosition}

@@ -21,11 +21,11 @@ class Sidebar extends React.Component {
                 <div className="sidebar-link">
                     <Link to="/home/companies">Your companies list</Link>
                 </div>
+                {/*<div className="sidebar-link">*/}
+                    {/*<Link to="/home/companies/update">Add new company</Link>*/}
+                {/*</div>*/}
                 <div className="sidebar-link">
-                    <Link to="/home/companies/update">Add new company</Link>
-                </div>
-                <div className="sidebar-link">
-                    <Link to="/home/companies/add">Update your company</Link>
+                    <Link to="/home/companies/add">Add new company</Link>
                 </div>
                 <div className="sidebar-link">
                     <Link to="/home/profile">Your profile</Link>

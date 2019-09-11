@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({'extended':'false'}));
 var users = require('./routes/users'); //routs
 var companies = require('./routes/companies'); //routs
 
-mongoose.connect('mongodb://127.0.0.1:27017/company', {useNewUrlParser: true});
+mongoose.connect('mongodb://127.0.0.1:27017/company', {useNewUrlParser: true, useFindAndModify: false});
 const connection = mongoose.connection;
 
 connection.once('open', function () {

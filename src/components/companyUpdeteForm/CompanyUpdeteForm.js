@@ -1,33 +1,28 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import axios from 'axios';
 import "./companyUpdeteForm.css";
+import connect from "react-redux/es/connect/connect";
+import store from "../../index";
 
 class CompanyUpdateForm extends React.Component {
     constructor(props) {
         super(props);
-        this.onChangeUserName = this.onChangeUserName.bind(this); // не забыть убрать это
         this.onChangeNameCompany = this.onChangeNameCompany.bind(this);
         this.onChangeAdressCompany = this.onChangeAdressCompany.bind(this);
         this.onChangeServiceCompany = this.onChangeServiceCompany.bind(this);
         this.onChangeEmployersCompany = this.onChangeEmployersCompany.bind(this);
         this.onChangeDescriptionCompany = this.onChangeDescriptionCompany.bind(this);
+        this.onChangeTypeCompany = this.onChangeTypeCompany.bind(this);
 
 
         this.state = {
-            userName: '', // потом сделать автозаполнение
-            nameCompany: '',
-            adressCompany: '',
-            serviceCompany: '',
-            employersCompany: '',
-            descriptionCompany: ''
+            nameCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.name : null,
+            adressCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.adress : null,
+            serviceCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.service : null,
+            employersCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.employers : null,
+            descriptionCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.description : null,
+            typeCompany: this.props.currentViewCompanyId ? this.props.currentViewCompanyId.typeCompany : null
         }
-    }
-
-    onChangeUserName(e) {
-        this.setState({
-            userName: e.target.value
-        });
     }
 
     onChangeNameCompany(e) {
@@ -60,33 +55,41 @@ class CompanyUpdateForm extends React.Component {
         });
     }
 
+    onChangeTypeCompany(e) {
+        this.setState({
+            typeCompany: e.target.value
+        });
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
 
-        const newCompany = {
-            userName: this.state.userName,
+        const updateCompany = {
+            id: this.props.currentViewCompanyId ? this.props.currentViewCompanyId._id : null,
             nameCompany: this.state.nameCompany,
             adressCompany: this.state.adressCompany,
             serviceCompany: this.state.serviceCompany,
             employersCompany: this.state.employersCompany,
             descriptionCompany: this.state.descriptionCompany,
+            typeCompany: this.state.typeCompany,
         };
 
-        axios.patch('http://localhost:4000/companies/update', newCompany)
-            .then(res => {
-                console.log(res.data)
-                // this.props.history.push("/")
-            }); // потом его на список перебросить
+        axios.patch('http://localhost:4000/companies/update', updateCompany)
+        .then(res => {
+            store.dispatch({
+                type: 'CURRENT_COMPANY_VIEW',
+                currentViewCompanyId: res.data ? res.data.company.find(x=>x._id === updateCompany.id): false
+            });
+                    store.dispatch({
+                        type: 'CURRENT_USER_SUCCESS',
+                        currentUser: res.data
+                    });
 
-        this.setState({
-            userName: '', // потом сделать автозаполнение
-            nameCompany: '',
-            adressCompany: '',
-            serviceCompany: '',
-            employersCompany: '',
-            descriptionCompany: ''
-        })
-    }
+            setTimeout(()=>{
+                this.props.history.push('/home/companies/profile')}, 1000);
+
+         });
+    };
 
     // отобразить сообщение о неправильной валидации от сервера
     // res.json({success: false, msg: 'Please pass all fields.'});
@@ -99,58 +102,58 @@ class CompanyUpdateForm extends React.Component {
                 <div className="outer">
                     <div className="middle">
                         <div className="inner">
-
                             <div className="login-wr">
                                 <h2>Update company</h2>
-
                                 <div className="form">
                                     <form onSubmit={this.onSubmit}>
+                                        <span>Name company:</span><br/>
                                         <input type="text"
-                                               placeholder="Your email"
-                                               value={this.state.userName}
-                                               onChange={this.onChangeUserName}>
-                                        </input>
-                                        <input type="text"
-                                               placeholder="Company name"
                                                value={this.state.nameCompany}
                                                onChange={this.onChangeNameCompany}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Adress:</span><br/>
                                         <input type="text"
-                                               placeholder="Adress"
                                                value={this.state.adressCompany}
                                                onChange={this.onChangeAdressCompany}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Service of activity:</span><br/>
                                         <input type="text"
-                                               placeholder="Service"
                                                value={this.state.serviceCompany}
                                                onChange={this.onChangeServiceCompany}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Number of employers:</span><br/>
                                         <input type="text"
-                                               placeholder="Employers"
                                                value={this.state.employersCompany}
                                                onChange={this.onChangeEmployersCompany}>
-                                        </input>
+                                        </input><br/>
+                                        <span>Description:</span><br/>
                                         <input type="text"
-                                               placeholder="Description"
                                                value={this.state.descriptionCompany}
                                                onChange={this.onChangeDescriptionCompany}>
+                                        </input><br/>
+                                        <span>Type:</span><br/>
+                                        <input type="text"
+                                               value={this.state.typeCompany}
+                                               onChange={this.onChangeTypeCompany}>
                                         </input>
-                                        {/*<p>*/}
-                                        {/*<Link to="/">У вас уже есть аккаунт? Войти</Link>*/}
-                                        {/*</p>*/}
-                                        {/*<a href="http://localhost:3000"><p> У вас уже есть аккаунт? Войти </p></a>*/}
                                         <input type="submit" value="Update"></input>
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
 }
 
-export default CompanyUpdateForm;
+
+const mapStateToProps = (store) => {
+    return {
+        currentUser: store.currentUserState.currentUser,
+        currentViewCompanyId: store.currentViewCompanyIdState.currentViewCompanyId
+    };
+};
+
+export default connect(mapStateToProps)(CompanyUpdateForm)

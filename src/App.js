@@ -15,6 +15,7 @@ import CompanyUpdateForm from "./components/companyUpdeteForm/CompanyUpdeteForm"
 import Profile from "./components/profile/Profile";
 import ProfileUpdateForm from "./components/profileUpdateForm/ProfileUpdateForm";
 import StartPage from "./components/startPage/StartPage";
+import ProfileCompany from "./components/profileCompany/ProfileCompany";
 
 
 function App() {
@@ -31,7 +32,8 @@ function App() {
                     <Route path="/home" exact component={StartPage}/>
                     <Route path="/home/userlist" exact component={Userlist}/>
                     <Route path="/home/companies" exact component={CompaniesList}/>
-                    <Route path="/home/companies/add" component={CompanyUpdateForm}/>
+                    <Route path="/home/companies/update" component={CompanyUpdateForm}/>
+                    <Route path="/home/companies/profile" component={ProfileCompany}/>
                     <Route path="/home/profile" exact component={Profile}/>
                     <Route path="/home/profile/update" component={ProfileUpdateForm}/>
 

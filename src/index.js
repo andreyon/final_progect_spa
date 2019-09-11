@@ -7,16 +7,21 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// REDUX
-// import * as reducers from './store/reducers';
-// const store = createStore(combineReducers(reducers), applyMiddleware(thunk));
-
 
 // Функция-редьюсер для current user
 const currentUserReducer = function(state = [], action) {
     switch(action.type) {
         case 'CURRENT_USER_SUCCESS':
             return Object.assign([], state, { currentUser: action.currentUser });
+    }
+    return state;
+}
+
+// Функция-редьюсер для current View Company
+const currentViewCompanyIdReducer = function(state = {}, action) {
+    switch(action.type) {
+        case 'CURRENT_COMPANY_VIEW':
+            return Object.assign({}, state, { currentViewCompanyId: action.currentViewCompanyId });
     }
     return state;
 }
@@ -32,17 +37,11 @@ const currentUserReducer = function(state = [], action) {
     return state;
 }*/
 
-
-
 // Функция-редьюсер для списка пользователей
-
 const userReducer = function(state = [], action) {
     switch(action.type) {
         case 'USER_LIST_SUCCESS':
             return Object.assign([], state, { users: action.users });
-            // return [
-            // ...state, action.users
-        // ]
     }
     return state;
 }
@@ -70,7 +69,8 @@ function companyReducer(state = [], action) {
 const reducers = combineReducers({
     userState: userReducer,
     companyState: companyReducer,
-    currentUserState: currentUserReducer
+    currentUserState: currentUserReducer,
+    currentViewCompanyIdState: currentViewCompanyIdReducer
 });
 
 // Создание хранилища с передачей редьюсера

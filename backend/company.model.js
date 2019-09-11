@@ -34,6 +34,7 @@ let UserSchema = new Schema({
             service: String,
             employers: String,
             description: String,
+            typeCompany: String
         }
 ]
 });

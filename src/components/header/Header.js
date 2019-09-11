@@ -12,9 +12,6 @@ class Header extends React.Component {
     logout = () => {
         localStorage.removeItem('jwtToken');
         this.props.history.push('/');
-        // window.location.reload();
-
-        // this.props.history.push('/home') // сделать переброску на страницу входа
     };
 
     render() {
@@ -42,5 +39,3 @@ export default withRouter(connect(
         // addToStore: ()
     })
 )(Header))
-
-// export default Header;

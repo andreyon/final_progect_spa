@@ -81,18 +81,18 @@ class CompanyAddForm extends React.Component {
                     currentUser: res.data
                 });
             });
-                setTimeout(() => {
-                    this.props.history.push('/home/companies')
-                }, 1000);
+        setTimeout(() => {
+            this.props.history.push('/home/companies')
+        }, 1000);
 
-                this.setState({
-                    nameCompany: "",
-                    adressCompany: "",
-                    serviceCompany: "",
-                    employersCompany: "",
-                    descriptionCompany: "",
-                    typeCompany: ""
-                })
+        this.setState({
+            nameCompany: "",
+            adressCompany: "",
+            serviceCompany: "",
+            employersCompany: "",
+            descriptionCompany: "",
+            typeCompany: ""
+        })
     };
 
     // отобразить сообщение о неправильной валидации от сервера
@@ -151,7 +151,6 @@ class CompanyAddForm extends React.Component {
         );
     }
 }
-
 
 const mapStateToProps = (store) => {
     return {

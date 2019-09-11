@@ -12,7 +12,7 @@ class CompaniesList extends React.Component {
     heandlerClickCompanyItem(e) {
         store.dispatch({
             type: 'CURRENT_COMPANY_VIEW',
-            currentViewCompanyId: this.props.currentUser ? this.props.currentUser.company.find(x=>x._id === e.currentTarget.className): false
+            currentViewCompanyId: this.props.currentUser ? this.props.currentUser.company.find(x => x._id === e.currentTarget.className) : false
         });
         setTimeout(() => {
             this.props.history.push('/home/companies/profile')

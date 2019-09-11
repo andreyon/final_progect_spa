@@ -7,9 +7,7 @@ import './App.css';
 import Signin from './components/signin/Signin'
 import Signup from './components/signup/Signup'
 import Home from './components/home/Home'
-import Header from './components/header/Header'
 import Sidebar from './components/sidebar/Sidebar'
-import Userlist from "./components/userList/Userlist";
 import CompaniesList from "./components/companiesList/CompaniesList";
 import CompanyUpdateForm from "./components/companyUpdeteForm/CompanyUpdeteForm";
 import Profile from "./components/profile/Profile";
@@ -31,7 +29,6 @@ function App() {
                     <Route component={Sidebar}/>
 
                     <Route path="/home" exact component={StartPage}/>
-                    {/*<Route path="/home/userlist" exact component={Userlist}/>*/}
                     <Route path="/home/companies" exact component={CompaniesList}/>
                     <Route path="/home/companies/add" component={CompanyAddForm}/>
                     <Route path="/home/companies/update" component={CompanyUpdateForm}/>

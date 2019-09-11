@@ -1,9 +1,7 @@
 import React from "react";
-import {Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from 'axios';
 import "./signup.css";
-
-// import Button from "./button";
 
 class Signup extends React.Component {
     constructor(props) {
@@ -81,16 +79,6 @@ class Signup extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`Form submitted:`);
-        console.log("FirstName:" + this.state.signupFirstName);
-        console.log(`LastName: ${this.state.signupLastName}`);
-        console.log(`PhoneNumber: ${this.state.signupPhoneNumber}`);
-        console.log(`NickName: ${this.state.signupNickName}`);
-        console.log(`Description: ${this.state.signupDescription}`);
-        console.log(`Position: ${this.state.signupPosition}`);
-        console.log(`UserName: ${this.state.userName}`);
-        console.log(`Password: ${this.state.password}`);
-
         const newUser = {
             signupFirstName: this.state.signupFirstName,
             signupLastName: this.state.signupLastName,
@@ -103,8 +91,10 @@ class Signup extends React.Component {
         }
 
         axios.post('http://localhost:4000/users/add', newUser)
-            .then(res => {console.log(res.data);
-                this.props.history.push("/")});
+            .then(res => {
+                console.log(res.data);
+                this.props.history.push("/")
+            });
 
         this.setState({
             signupFirstName: '',
@@ -118,21 +108,14 @@ class Signup extends React.Component {
         })
     }
 
-    // отобразить сообщение о неправильной валидации от сервера
-    // res.json({success: false, msg: 'Please pass all fields.'});
-    // и другие сообщения тоже,
-
     render() {
         return (
             <div id="range2">
-
                 <div className="outer">
                     <div className="middle">
                         <div className="inner">
-
                             <div className="login-wr">
                                 <h2>Sign up</h2>
-
                                 <div className="form">
                                     <form onSubmit={this.onSubmit}>
                                         <input type="text"
@@ -183,11 +166,9 @@ class Signup extends React.Component {
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }

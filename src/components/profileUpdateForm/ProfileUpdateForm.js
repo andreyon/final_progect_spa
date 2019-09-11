@@ -1,10 +1,7 @@
 import React from "react";
-import {Link} from "react-router-dom";
 import axios from 'axios';
 import connect from "react-redux/es/connect/connect";
 import store from "../../index";
-
-// import "./profileUpdateForm.css;
 
 class ProfileUpdateForm extends React.Component {
     constructor(props) {
@@ -90,25 +87,11 @@ class ProfileUpdateForm extends React.Component {
                     type: 'CURRENT_USER_SUCCESS',
                     currentUser: res.data.user
                 })
-                    setTimeout(()=>{
-                this.props.history.push('/home/profile')}, 1000);
+                setTimeout(() => {
+                    this.props.history.push('/home/profile')
+                }, 1000);
             });
-
-
-        /*this.setState({
-            signupFirstName: '',
-            signupLastName: '',
-            signupPhoneNumber: '',
-            signupNickName: '',
-            signupDescription: '',
-            signupPosition: '',
-            userName: ''
-        })*/
     }
-
-    // отобразить сообщение о неправильной валидации от сервера
-    // res.json({success: false, msg: 'Please pass all fields.'});
-    // и другие сообщения тоже,
 
     render() {
         return (
@@ -125,65 +108,51 @@ class ProfileUpdateForm extends React.Component {
                                     <form onSubmit={this.onSubmit}>
                                         <span>First name:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.state.signupFirstName}
                                                value={this.state.signupFirstName}
                                                onChange={this.onChangeSignupFirstName}>
                                         </input><br/>
                                         <span>Last name:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupLastName : false}
                                                value={this.state.signupLastName}
                                                onChange={this.onChangeSignupLastName}>
                                         </input><br/>
                                         <span>PhoneNumber:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupPhoneNumber : false}
                                                value={this.state.signupPhoneNumber}
                                                onChange={this.onChangeSignupPhoneNumber}>
                                         </input><br/>
                                         <span>Nick name:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupNickName : false}
                                                value={this.state.signupNickName}
                                                onChange={this.onChangeSignupNickName}>
                                         </input><br/>
                                         <span>Description:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupDescription : false}
                                                value={this.state.signupDescription}
                                                onChange={this.onChangeSignupDescription}>
                                         </input><br/>
                                         <span>Position:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.signupPosition : false}
                                                value={this.state.signupPosition}
                                                onChange={this.onChangeSignupPosition}>
                                         </input>
                                         <br/>
                                         <span>Email:</span><br/>
                                         <input type="text"
-                                               // placeholder={this.props.currentUser ? this.props.currentUser.userName : false}
                                                value={this.state.userName}
                                                onChange={this.onChangeUserName}>
                                         </input>
-                                        {/*<p>*/}
-                                        {/*<Link to="/">У вас уже есть аккаунт? Войти</Link>*/}
-                                        {/*</p>*/}
-                                        {/*<a href="http://localhost:3000"><p> У вас уже есть аккаунт? Войти </p></a>*/}
                                         <input type="submit" value="Update"></input>
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }
 }
-
 
 const mapStateToProps = (store) => {
     return {
@@ -197,6 +166,3 @@ export default connect(
         // addToStore: ()
     })
 )(ProfileUpdateForm)
-
-
-// export default ProfileUpdateForm;

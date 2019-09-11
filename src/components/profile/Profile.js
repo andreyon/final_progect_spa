@@ -1,16 +1,12 @@
 import React from "react";
 import "./profile.css";
-import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import {connect} from 'react-redux'
-import store from '../../index';
 
 class Profile extends React.Component {
     constructor(props) {
         super(props);
     }
-
 
     render() {
         return (
@@ -63,14 +59,8 @@ const mapStateToProps = (store) => {
 
 export default connect(
     mapStateToProps,
-    // state => ({
-    //     testStore: state
-    // })
-
     dispatch => ({
         // addToStore: ()
     })
 )(Profile)
 
-
-// export default Userlist;

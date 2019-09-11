@@ -4,11 +4,8 @@ import "./signin.css";
 import axios from "axios";
 import store from "../../index";
 
-// import Button from "./button";
-
 class Signin extends React.Component {
     constructor(props) {
-        // переименовать свойства в signin ?
         super(props);
         this.onChangeUserName = this.onChangeUserName.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
@@ -35,9 +32,6 @@ class Signin extends React.Component {
     onSubmit = (e) => {
         e.preventDefault();
 
-        console.log(`UserName: ${this.state.userName}`);
-        console.log(`Password: ${this.state.password}`);
-
         const User = {
             userName: this.state.userName,
             password: this.state.password
@@ -52,15 +46,12 @@ class Signin extends React.Component {
                     currentUser: result.data.user
                 });
                 this.props.history.push('/home');
-                console.log(result.data.currentUserId);// текущий пользователь
             })
             .catch((error) => {
                 if (error.response.status === 401) {
                     this.setState({message: 'Login failed. Username or password not match'});
                 }
             });
-
-        console.log(localStorage);
 
         this.setState({
             userName: '',
@@ -105,11 +96,9 @@ class Signin extends React.Component {
                                     </form>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         );
     }

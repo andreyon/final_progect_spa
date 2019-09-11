@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import {Provider} from 'react-redux';
-import thunk from 'redux-thunk';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -26,17 +25,6 @@ const currentViewCompanyIdReducer = function(state = {}, action) {
     return state;
 }
 
-/*const currentUserIdReducer = function(state = {currentUserId: "no exit"}, action) {
-    switch(action.type) {
-        case 'CURRENT_USER_SUCCESS':
-            return Object.assign([], state, { currentUserId: action.currentUserId });
-        // return [
-        // ...state, action.users
-        // ]
-    }
-    return state;
-}*/
-
 // Функция-редьюсер для списка пользователей
 const userReducer = function(state = [], action) {
     switch(action.type) {
@@ -45,15 +33,6 @@ const userReducer = function(state = [], action) {
     }
     return state;
 }
-
-// function userReducer(state = [], action) {
-//     if (action.type === 'ADD_USERS') {
-//         return [
-//             ...state, action.user
-//         ]
-//     }
-//     return state;
-// }
 
 // Функция-редьюсер для списка компаний
 function companyReducer(state = [], action) {
@@ -68,23 +47,12 @@ function companyReducer(state = [], action) {
 // Combine Reducers
 const reducers = combineReducers({
     userState: userReducer,
-    companyState: companyReducer,
     currentUserState: currentUserReducer,
     currentViewCompanyIdState: currentViewCompanyIdReducer
 });
 
 // Создание хранилища с передачей редьюсера
 const store = createStore(reducers);
-
-// Отправка первого экшена, чтобы выразить намерение изменить состояние
-store.dispatch({type: 'ADD_USERS', user: {name: 'wow'}});
-store.dispatch({type: 'ADD_USERS', user: {name: 'lol'}});
-// store.dispatch({type: 'ADD_COMPANIES', company: {name: 'Kharkivgaz'}});
-store.dispatch({type: 'USER_LIST_SUCCESS', user: {name: 'Kharkivgaz'}});
-
-store.dispatch({type: 'CURRENT_USER_SUCCESS'});
-
-
 
 ReactDOM.render(
     <Provider store={store}>

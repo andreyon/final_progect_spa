@@ -75,20 +75,21 @@ class CompanyUpdateForm extends React.Component {
         };
 
         axios.patch('http://localhost:4000/companies/update', updateCompany)
-        .then(res => {
-            store.dispatch({
-                type: 'CURRENT_COMPANY_VIEW',
-                currentViewCompanyId: res.data ? res.data.company.find(x=>x._id === updateCompany.id): false
+            .then(res => {
+                store.dispatch({
+                    type: 'CURRENT_COMPANY_VIEW',
+                    currentViewCompanyId: res.data ? res.data.company.find(x => x._id === updateCompany.id) : false
+                });
+                store.dispatch({
+                    type: 'CURRENT_USER_SUCCESS',
+                    currentUser: res.data
+                });
+
+                setTimeout(() => {
+                    this.props.history.push('/home/companies/profile')
+                }, 1000);
+
             });
-                    store.dispatch({
-                        type: 'CURRENT_USER_SUCCESS',
-                        currentUser: res.data
-                    });
-
-            setTimeout(()=>{
-                this.props.history.push('/home/companies/profile')}, 1000);
-
-         });
     };
 
     // отобразить сообщение о неправильной валидации от сервера

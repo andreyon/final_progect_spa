@@ -11,15 +11,19 @@ class ProfileCompany extends React.Component {
         this.hendleDelete = this.hendleDelete.bind(this);
     }
 
-
     hendleDelete = (e) => {
-        axios.delete('http://localhost:4000/companies/delete', {params: {id: this.props.currentViewCompanyId ? this.props.currentViewCompanyId._id : null, userId: this.props.currentUser ? this.props.currentUser._id : false}})
-        .then(res => {
-            store.dispatch({
-                type: 'CURRENT_USER_SUCCESS',
-                currentUser: res.data
+        axios.delete('http://localhost:4000/companies/delete', {
+            params: {
+                id: this.props.currentViewCompanyId ? this.props.currentViewCompanyId._id : null,
+                userId: this.props.currentUser ? this.props.currentUser._id : false
+            }
+        })
+            .then(res => {
+                store.dispatch({
+                    type: 'CURRENT_USER_SUCCESS',
+                    currentUser: res.data
+                });
             });
-        });
         setTimeout(() => {
             this.props.history.push('/home/companies')
         }, 1000);
@@ -62,7 +66,6 @@ class ProfileCompany extends React.Component {
         );
     }
 }
-
 
 const mapStateToProps = (store) => {
     return {

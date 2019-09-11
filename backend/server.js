@@ -12,8 +12,8 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 
-var users = require('./routes/users'); //routs
-var companies = require('./routes/companies'); //routs
+const users = require('./routes/users'); //routs
+const companies = require('./routes/companies'); //routs
 
 mongoose.connect('mongodb://127.0.0.1:27017/company', {useNewUrlParser: true, useFindAndModify: false});
 const connection = mongoose.connection;
@@ -23,12 +23,12 @@ connection.once('open', function () {
 });
 
 
-var passport = require('passport');
-var settings = require('./config/settings');
+const passport = require('passport');
+const settings = require('./config/settings');
 require('./config/passport')(passport);
-var jwt = require('jsonwebtoken');
-var auth = require('./routes/auth');
-var logout = require('./routes/logout');
+const jwt = require('jsonwebtoken');
+const auth = require('./routes/auth');
+const logout = require('./routes/logout');
 
 app.use('/login', auth); // роутер идентификации
 app.use('/current', auth); // роутер текущего пользователя

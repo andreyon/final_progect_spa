@@ -1,6 +1,5 @@
 import React from "react";
 import "./profileCompany.css";
-import ReactDOM from 'react-dom';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {connect} from 'react-redux'
@@ -9,17 +8,24 @@ import store from '../../index';
 class ProfileCompany extends React.Component {
     constructor(props) {
         super(props);
+        this.hendleDelete = this.hendleDelete.bind(this);
     }
 
 
-    render() {
+    hendleDelete = (e) => {
+        axios.delete('http://localhost:4000/companies/delete', {params: {id: this.props.currentViewCompanyId ? this.props.currentViewCompanyId._id : null, userId: this.props.currentUser ? this.props.currentUser._id : false}})
+        .then(res => {
+            store.dispatch({
+                type: 'CURRENT_USER_SUCCESS',
+                currentUser: res.data
+            });
+        });
+        setTimeout(() => {
+            this.props.history.push('/home/companies')
+        }, 1000);
+    };
 
-        // let curUser = (this.props.currentUser) ? this.props.currentUser : false
-        // let currentCompany = this.props.currentUser.company.filter(x=>x._id === this.props.currentViewCompanyId);
-        // 5d7624cdd227991c88ca12d3
-        // console.log(currentCompany)
-        // console.log(curUser)
-        console.log(this.props.currentViewCompanyId)
+    render() {
         return (
             <div className="profile-company">
                 <h2>Company profile</h2>
@@ -50,7 +56,7 @@ class ProfileCompany extends React.Component {
 
                 <div className="profile-company-btn">
                     <Link to="/home/companies/update">Update profile</Link>
-                    <Link to="/home/companies/delete">Delete profile</Link>
+                    <button onClick={this.hendleDelete}>Delete</button>
                 </div>
             </div>
         );

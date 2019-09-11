@@ -38,6 +38,7 @@ app.use('/users/add', users); // end point add user
 app.use('/users/update', users); // point patch user
 app.use('/companies/update', companies); // update company
 app.use('/companies/add', companies); // add company
+app.use('/companies/delete', companies); // delete company
 
 app.listen(PORT, function () {
     console.log("Server is running on Port: " + PORT);

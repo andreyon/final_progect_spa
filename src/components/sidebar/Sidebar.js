@@ -15,9 +15,9 @@ class Sidebar extends React.Component {
     render() {
         return (
             <div className="sidebar">
-                <div className="sidebar-link">
-                    <Link to ="/home/userlist">Users list</Link>
-                </div>
+                {/*<div className="sidebar-link">*/}
+                    {/*<Link to ="/home/userlist">Users list</Link>*/}
+                {/*</div>*/}
                 <div className="sidebar-link">
                     <Link to="/home/companies">Your companies list</Link>
                 </div>
